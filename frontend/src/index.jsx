@@ -1,18 +1,20 @@
-
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { AppContainer } from 'react-hot-loader'; // required
+import {AppContainer} from 'react-hot-loader'; // required
 
 import App from './components/App.jsx';
 
 import './index.scss';
+import {HashRouter} from 'react-router-dom';
 
 function renderApp() {
     // We now render `<AppContainer>` instead of our App component.
     ReactDOM.render(
-        <AppContainer>
-            <App />
-        </AppContainer>,
+        <HashRouter>
+            <AppContainer>
+                <App/>
+            </AppContainer>
+        </HashRouter>,
         document.getElementById('main')
     );
 }

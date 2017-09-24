@@ -5,17 +5,21 @@ import React from 'react';
 import Header from './header/Header.jsx';
 import Content from './content/Content.jsx';
 import Footer from './footer/Footer.jsx';
-import ManageEquipment from './manageequipment/ManageEquipment.jsx';
+import Login from './login/Login.jsx';
 
 // Styles
 import './App.scss';
+import {Route, Switch} from 'react-router-dom';
 
 function App() {
     return (
         <div>
-            <Header />
-            <Content />
-            <Footer />
+            <Header/>
+            <Switch>
+                <Route path='/equipment' component={Content}/>
+                <Route exact path='/' component={Login}/>
+            </Switch>
+            <Footer/>
         </div>
     );
 }

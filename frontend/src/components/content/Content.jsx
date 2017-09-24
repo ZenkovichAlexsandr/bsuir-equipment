@@ -10,6 +10,10 @@ import ManageEquipment from './../manageequipment/ManageEquipment.jsx';
 class Content extends React.Component {
     constructor(props) {
         super(props);
+
+        if (!localStorage.getItem('token')) {
+            this.props.history.push('/');
+        }
         this.state = {
             equipments: [],
             showManage: false
@@ -17,13 +21,15 @@ class Content extends React.Component {
 
         this.closeManage = this.closeManage.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
+        this.logout = this.logout.bind(this);
     }
 
     componentDidMount() {
         fetch('http://localhost:8080/equipment', {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `bearer ${localStorage.getItem('token')}`
             }
         }).then((response) => {
             response.json()
@@ -47,12 +53,18 @@ class Content extends React.Component {
         fetch(`http://localhost:8080/equipment/${id}`, {
             method: 'DELETE',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `bearer ${localStorage.getItem('token')}`
             }
         }).then(() => {
             this.componentDidMount();
         });
 
+    }
+
+    logout() {
+        localStorage.setItem('Authorization', undefined);
+        this.props.history.push('/');
     }
 
     render() {
@@ -70,7 +82,7 @@ class Content extends React.Component {
                             </tr>
                             </thead>
                             <tbody>
-                            {this.state.equipments.map((it, index) => {
+                            {this.state.equipments ? this.state.equipments.map((it, index) => {
                                 return (
                                     <tr key={index}>
                                         <th scope="row">{index}</th>
@@ -89,7 +101,7 @@ class Content extends React.Component {
                                         </td>
                                     </tr>
                                 );
-                            })}
+                            }) : ''}
                             </tbody>
                         </table>
                     </div>
@@ -98,6 +110,9 @@ class Content extends React.Component {
                     <div className="col-md-2">
                         <button onClick={this.openManage.bind(this, undefined)} type="button"
                                 className="btn btn-primary">Add equipment
+                        </button>
+                        <button onClick={this.logout} type="button"
+                                className="btn btn-primary">Log out
                         </button>
                     </div>
                 </div>

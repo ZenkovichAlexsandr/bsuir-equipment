@@ -25,7 +25,8 @@ class ManageEquipment extends React.Component {
         fetch(url, {
             method: method,
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `bearer ${localStorage.getItem('token')}`
             },
             body: JSON.stringify({
                 name: this.state.name
