@@ -77,6 +77,7 @@ class Content extends React.Component {
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
+                                <th>Price</th>
                                 <th>Edit</th>
                                 <th>Remove</th>
                             </tr>
@@ -87,6 +88,7 @@ class Content extends React.Component {
                                     <tr key={index}>
                                         <th scope="row">{index}</th>
                                         <td>{it.name}</td>
+                                        <td>{it.price}</td>
                                         <td>
                                             <button type="button" className="btn btn-warning"
                                                     onClick={this.openManage.bind(this, it)}>

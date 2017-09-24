@@ -23,4 +23,11 @@ public class EquipmentDto implements Dto {
     private Long id;
     @NotNull
     private String name;
+
+    private String details;
+    private String description;
+    @NotNull
+    private String status;
+    @NotNull
+    private String price;
 }

@@ -8,14 +8,25 @@ import './ManageEquipment.scss';
 class ManageEquipment extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {name: this.props.equipment ? this.props.equipment.name : ''};
+        const e = this.props.equipment || {};
+        this.state = {
+            name: e.name,
+            details: e.details,
+            description: e.description,
+            status: e.status,
+            price: e.price
+        };
 
         this.save = this.save.bind(this);
         this.updateName = this.updateName.bind(this);
+        this.updateDetails = this.updateDetails.bind(this);
+        this.updateDescription = this.updateDescription.bind(this);
+        this.updateStatus = this.updateStatus.bind(this);
+        this.updatePrice = this.updatePrice.bind(this);
     }
 
     save() {
-        if (!this.state.name) {
+        if (!this.state.name || !this.state.status || !this.state.price) {
             return;
         }
         const url = this.props.equipment ? `http://localhost:8080/equipment/${this.props.equipment.id}` :
@@ -29,7 +40,11 @@ class ManageEquipment extends React.Component {
                 'Authorization': `bearer ${localStorage.getItem('token')}`
             },
             body: JSON.stringify({
-                name: this.state.name
+                name: this.state.name,
+                details: this.state.details,
+                description: this.state.description,
+                status: this.state.status,
+                price: this.state.price
             })
         }).then(response => {
             response.json()
@@ -43,6 +58,23 @@ class ManageEquipment extends React.Component {
     updateName(event) {
         this.setState({name: event.target.value});
     }
+
+    updateDetails(event) {
+        this.setState({details: event.target.value});
+    }
+
+    updateDescription(event) {
+        this.setState({description: event.target.value});
+    }
+
+    updateStatus(event) {
+        this.setState({status: event.target.value});
+    }
+
+    updatePrice(event) {
+        this.setState({price: event.target.value});
+    }
+
 
     render() {
         return (
@@ -60,6 +92,26 @@ class ManageEquipment extends React.Component {
                                 <div className="form-group">
                                     <label className="form-control-label">Name:</label>
                                     <input value={this.state.name} onChange={this.updateName} type="text"
+                                           className="form-control"/>
+                                </div>
+                                <div className="form-group">
+                                    <label className="form-control-label">Details:</label>
+                                    <input value={this.state.details} onChange={this.updateDetails} type="text"
+                                           className="form-control"/>
+                                </div>
+                                <div className="form-group">
+                                    <label className="form-control-label">Description:</label>
+                                    <input value={this.state.description} onChange={this.updateDescription} type="text"
+                                           className="form-control"/>
+                                </div>
+                                <div className="form-group">
+                                    <label className="form-control-label">Status:</label>
+                                    <input value={this.state.status} onChange={this.updateStatus} type="text"
+                                           className="form-control"/>
+                                </div>
+                                <div className="form-group">
+                                    <label className="form-control-label">Price:</label>
+                                    <input value={this.state.price} onChange={this.updatePrice} type="text"
                                            className="form-control"/>
                                 </div>
                             </form>

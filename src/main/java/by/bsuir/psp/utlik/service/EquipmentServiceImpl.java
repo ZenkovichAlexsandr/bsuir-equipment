@@ -56,6 +56,10 @@ public class EquipmentServiceImpl implements EquipmentService {
         Equipment newEntity = this.transformer.transform(dto);
 
         entity.setName(newEntity.getName());
+        entity.setDetails(newEntity.getDetails());
+        entity.setDescription(newEntity.getDescription());
+        entity.setStatus(newEntity.getStatus());
+        entity.setPrice(newEntity.getPrice());
         entity = this.repository.save(entity);
         return this.transformer.transform(entity);
     }

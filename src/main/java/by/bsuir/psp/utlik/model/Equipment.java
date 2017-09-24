@@ -27,4 +27,9 @@ public class Equipment implements Serializable {
     private Long id;
 
     private String name;
+    private String details;
+    private String description;
+    private String status;
+    private String price;
+
 }

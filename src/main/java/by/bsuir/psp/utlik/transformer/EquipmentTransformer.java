@@ -16,6 +16,10 @@ public class EquipmentTransformer implements DtoTransformer<EquipmentDto, Equipm
         return EquipmentDto.builder()
                 .id(entity.getId())
                 .name(entity.getName())
+                .details(entity.getDetails())
+                .description(entity.getDescription())
+                .status(entity.getStatus())
+                .price(entity.getPrice())
                 .build();
     }
 
@@ -23,6 +27,10 @@ public class EquipmentTransformer implements DtoTransformer<EquipmentDto, Equipm
     public Equipment transform(EquipmentDto dto) {
         return Equipment.builder()
                 .name(dto.getName())
+                .details(dto.getDetails())
+                .description(dto.getDescription())
+                .status(dto.getStatus())
+                .price(dto.getPrice())
                 .build();
     }
 }
