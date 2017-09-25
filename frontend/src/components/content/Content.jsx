@@ -6,6 +6,7 @@ import 'whatwg-fetch'
 import './Content.scss';
 
 import ManageEquipment from './../manageequipment/ManageEquipment.jsx';
+import { Chart } from 'react-google-charts';
 
 class Content extends React.Component {
     constructor(props) {
@@ -117,6 +118,15 @@ class Content extends React.Component {
                                 className="btn btn-primary">Log out
                         </button>
                     </div>
+                    <Chart
+                        chartType="ScatterChart"
+                        data={[['Age', 'Weight'], [8, 12], [4, 5.5]]}
+                        options={{}}
+                        graph_id="ScatterChart"
+                        width="100%"
+                        height="400px"
+                        legend_toggle
+                    />
                 </div>
                 <div id="manage">
                     {this.state.showManage ?
